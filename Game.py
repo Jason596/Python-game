@@ -12,6 +12,7 @@ def main():
     screen.blit(background, (0, 0))
 
     while True:
+        pygame.event.get()
         # 4 display the window
         pygame.display.update()
 
