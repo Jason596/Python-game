@@ -12,8 +12,10 @@ def main():
     screen.blit(background, (0, 0))
 
     while True:
+        # events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                # exit pygame and exit python program
                 pygame.quit()
                 exit()
 
