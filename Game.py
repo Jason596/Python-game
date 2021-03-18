@@ -21,13 +21,25 @@ def main():
                 # exit pygame and exit python program
                 pygame.quit()
                 exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == K_a or event.key == K_LEFT:
-                    print("left")
-                elif event.key == K_d or event.key == K_RIGHT:
-                    print("right")
-                elif event.key == K_SPACE:
-                    print("space")
+
+        key_pressed = pygame.key.get_pressed();
+
+        if key_pressed[K_w] or key_pressed[K_UP]:
+            print("up")
+        if key_pressed[K_s] or key_pressed[K_DOWN]:
+            print("down")
+        if key_pressed[K_a] or key_pressed[K_LEFT]:
+            print("left")
+        if key_pressed[K_d] or key_pressed[K_RIGHT]:
+            print("right")
+
+            # elif event.type == pygame.KEYDOWN:
+            #     if event.key == K_a or event.key == K_LEFT:
+            #         print("left")
+            #     elif event.key == K_d or event.key == K_RIGHT:
+            #         print("right")
+            #     elif event.key == K_SPACE:
+            #         print("space")
         # 4 display the window
         pygame.display.update()
 
