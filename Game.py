@@ -1,5 +1,6 @@
 import pygame
 
+
 def main():
     # 1 create a window
     screen = pygame.display.set_mode((602, 967), 0, 32)
@@ -15,5 +16,6 @@ def main():
         pygame.display.update()
 
 
+# Click mouse or anything is an event, you need to create a event handler to handle it.
 if __name__ == '__main__':
     main()
