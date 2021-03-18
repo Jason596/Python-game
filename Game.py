@@ -12,7 +12,11 @@ def main():
     screen.blit(background, (0, 0))
 
     while True:
-        pygame.event.get()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
         # 4 display the window
         pygame.display.update()
 
