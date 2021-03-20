@@ -42,17 +42,22 @@ class HeroPlane(object):
         self.screen.blit(self.player, (self.x, self.y))
         for bullet in self.bullets:
             bullet.display()
+            bullet.auto_move()
 
 
 class Bullet(object):
     def __init__(self, screen, x, y):
-        self.x = 0
-        self.y = 0
+        self.x = x + 160 / 2 - 22 / 2
+        self.y = y - 22
         self.image = pygame.image.load("./bullet-image.jpg")
         self.screen = screen
+        self.speed = 10
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
+
+    def auto_move(self):
+        self.y -= self.speed
 
 
 def main():
