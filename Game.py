@@ -16,6 +16,8 @@ def main():
 
     x = 602 / 2 - 225 / 2
     y = 700
+    speed = 10
+
     while True:
         screen.blit(background, (0, 0))
         screen.blit(player, (x, y))
@@ -30,16 +32,16 @@ def main():
         key_pressed = pygame.key.get_pressed();
 
         if key_pressed[K_w] or key_pressed[K_UP]:
-            y -= 1
+            y -= speed
             print("up")
         if key_pressed[K_s] or key_pressed[K_DOWN]:
-            y += 1
+            y += speed
             print("down")
         if key_pressed[K_a] or key_pressed[K_LEFT]:
-            x -= 1
+            x -= speed
             print("left")
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
-            x += 1
+            x += speed
             print("right")
 
             # elif event.type == pygame.KEYDOWN:
