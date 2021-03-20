@@ -1,48 +1,33 @@
 import time
 
 import pygame
-from pygame import K_w, K_UP, QUIT, K_s, K_DOWN, K_LEFT, K_RIGHT, K_d, K_a
+from pygame import K_w, K_UP, QUIT, K_s, K_DOWN, K_LEFT, K_RIGHT, K_d, K_a, K_SPACE
 
 
-def main():
-    # 1 create a window
-    screen = pygame.display.set_mode((602, 967), 0, 32)
+class HeroPlane(object):
+    def __init__(self, screen):
+        self.player = pygame.image.load("./airplane.jpeg")
+        # 3 load background image to the window
+        self.x = 602 / 2 - 225 / 2
+        self.y = 700
+        self.speed = 10
+        self.screen = screen
+        self.bullets = []
 
-    # 2 load background image
-    background = pygame.image.load("./background.png")
-    player = pygame.image.load("./airplane.jpeg")
-
-    # 3 load background image to the window
-
-    x = 602 / 2 - 225 / 2
-    y = 700
-    speed = 10
-
-    while True:
-        screen.blit(background, (0, 0))
-        screen.blit(player, (x, y))
-
-        # events
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                # exit pygame and exit python program
-                pygame.quit()
-                exit()
-
+    def key_control(self):
         key_pressed = pygame.key.get_pressed();
 
         if key_pressed[K_w] or key_pressed[K_UP]:
-            y -= speed
-            print("up")
+            self.y -= self.speed
         if key_pressed[K_s] or key_pressed[K_DOWN]:
-            y += speed
-            print("down")
+            self.y += self.speed
         if key_pressed[K_a] or key_pressed[K_LEFT]:
-            x -= speed
-            print("left")
+            self.x -= self.speed
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
-            x += speed
-            print("right")
+            self.x += self.speed
+        if key_pressed[K_SPACE]:
+            bullet = Bullet(self.screen, self.x, self.y)
+            self.bullets.append(bullet)
 
             # elif event.type == pygame.KEYDOWN:
             #     if event.key == K_a or event.key == K_LEFT:
@@ -52,6 +37,46 @@ def main():
             #     elif event.key == K_SPACE:
             #         print("space")
         # 4 display th e window
+
+    def display(self):
+        self.screen.blit(self.player, (self.x, self.y))
+        for bullet in self.bullets:
+            bullet.display()
+
+
+class Bullet(object):
+    def __init__(self, screen, x, y):
+        self.x = 0
+        self.y = 0
+        self.image = pygame.image.load("./bullet-image.jpg")
+        self.screen = screen
+
+    def display(self):
+        self.screen.blit(self.image, (self.x, self.y))
+
+
+def main():
+    # 1 create a window
+    screen = pygame.display.set_mode((602, 967), 0, 32)
+
+    # 2 load background image
+    background = pygame.image.load("./background.png")
+
+    player = HeroPlane(screen)
+
+    while True:
+        screen.blit(background, (0, 0))
+
+        # events
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                # exit pygame and exit python program
+                pygame.quit()
+                exit()
+        player.key_control()
+        player.display()
+
+        # constantly display the window
         pygame.display.update()
         time.sleep(0.01)
 
